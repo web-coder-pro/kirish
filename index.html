@@ -4,55 +4,163 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ro'yxatdan o'tish - Pro</title>
-<link rel="stylesheet" href="krishstyle.css">
-  <script type="module">
-      // Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCv9lk4gceOKaef8YdGHdWaOt1Lx1U-FIk",
-  authDomain: "proexem-6381a.firebaseapp.com",
-  projectId: "proexem-6381a",
-  storageBucket: "proexem-6381a.firebasestorage.app",
-  messagingSenderId: "591009159276",
-  appId: "1:591009159276:web:dea631e11141150cf06049",
-  measurementId: "G-LE53LDLQKQ"
-};
+<style>
+/* Kirish sahifa CSS */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI, sans-serif;
+}
 
-  // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-  </script>
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(135deg,#004aad,#00aaff);
+  color:white;
+}
+
+.center-id{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+}
+
+.input-box{
+  width:380px;
+  padding:40px;
+  background:#0a1f3f;
+  border-radius:12px;
+  box-shadow:0 0 25px rgba(0,170,255,0.6);
+  animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.h-pro{
+  text-align:center;
+  margin-bottom:30px;
+  color:#00f0ff;
+}
+
+.input-group{
+  position:relative;
+  margin-bottom:25px;
+}
+
+.input-group input{
+  width:100%;
+  padding:10px;
+  border:none;
+  outline:none;
+  background:transparent;
+  border-bottom:2px solid #00f0ff;
+  color:white;
+  font-size:16px;
+  transition:0.3s;
+}
+
+.input-group label{
+  position:absolute;
+  top:10px;
+  left:0;
+  color:#aadfff;
+  pointer-events:none;
+  transition:0.3s;
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label{
+  top:-15px;
+  font-size:12px;
+  color:#00f0ff;
+}
+
+.btn-kirish{
+  width:100%;
+  padding:12px;
+  background:#00aaff;
+  border:none;
+  border-radius:6px;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn-kirish:hover{
+  background:#0077aa;
+  transform:scale(1.05);
+}
+
+.login-text{
+  text-align:center;
+  margin-top:15px;
+  color:#aadfff;
+}
+
+.login-text a{
+  color:#00f0ff;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.login-text a:hover{
+  color:#fff;
+  text-decoration:underline;
+}
+
+.links{
+  margin-top:20px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.links a{
+  color:#aadfff;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.links a:hover{
+  color:#00f0ff;
+  text-decoration:underline;
+}
+</style>
 </head>
-<body>
 
+<body>
 <div class="center-id">
   <div class="input-box">
     <h1 class="h-pro">Pro.uz - Ro'yxatdan o'tish</h1>
+
     <form id="signupForm">
       <div class="input-group">
         <input type="text" id="name" required>
-        <label>Ismingiz</label>
+        <label for="name">Ismingiz</label>
       </div>
       <div class="input-group">
         <input type="email" id="email" required>
-        <label>Email</label>
+        <label for="email">Email</label>
       </div>
       <div class="input-group">
         <input type="password" id="password" required>
-        <label>Parol</label>
+        <label for="password">Parol</label>
       </div>
       <button type="submit" class="btn-kirish">Ro'yxatdan o'tish ✔</button>
     </form>
 
     <p class="login-text">
       Akkauntingiz bormi? <a href="login.html">Kirish</a>
-    </p>
+    </p><br>
 
     <hr>
     <div class="links">
@@ -65,5 +173,42 @@ const analytics = getAnalytics(app);
   </div>
 </div>
 
+<!-- Firebase + JS inline -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCv9lk4gceOKaef8YdGHdWaOt1Lx1U-FIk",
+    authDomain: "proexem-6381a.firebaseapp.com",
+    projectId: "proexem-6381a",
+    storageBucket: "proexem-6381a.firebasestorage.app",
+    messagingSenderId: "591009159276",
+    appId: "1:591009159276:web:dea631e11141150cf06049",
+    measurementId: "G-LE53LDLQKQ"
+  };
+
+  // Firebase init
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Signup form
+  const signupForm = document.getElementById("signupForm");
+  signupForm.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const name = document.getElementById("name").value;
+
+    createUserWithEmailAndPassword(auth,email,password)
+      .then((userCredential)=>{
+        alert(`Ro'yxatdan o'tish muvaffaqiyatli, ${name}!`);
+        signupForm.reset();
+      })
+      .catch((error)=>{
+        alert(error.message);
+      });
+  });
+</script>
 </body>
 </html>
